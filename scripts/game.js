@@ -6,6 +6,7 @@ const displayresult = document.getElementById("result");
 const title =  document.getElementById("title");
 let computerWins = 0;
 let playerWins = 0;
+let computerSelection;
 let result = "Don't worry the computer choice is picked randomly. No cheating here :)";
 
 displayresult.innerHTML = result + "<br><br>First to score 5 points wins!";
@@ -71,64 +72,46 @@ function playRound(player, computer) {
     }
 }
 
+function choice(playerchoice){
+    computerSelection = computerPlay();
+    result = playRound(playerchoice, computerSelection);
+    console.log(result);
+    if(computerWins > 4){
+        title.innerHTML = "YOU LOST! GAME OVER!";
+    }
+    else if(playerWins > 4){
+        title.innerHTML = "YOU WON! CONGRATULATIONS!";
+    }
+    displayresult.innerHTML = result +
+    "<br><br>Your score: "+playerWins +
+    "<br>Computer score: "+computerWins;
+}
+
 reset.addEventListener("click", () => {
     if(computerWins > 4 || playerWins > 4){
         playerWins = 0;
         computerWins = 0;
-        title.innerHTML = "Pick your weapon"
-        displayresult.innerHTML = "Scores reset!"
-        + "<br><br>Your score: "+playerWins
-        + "<br>Computer score: "+computerWins;
+        title.innerHTML = "Pick your weapon";
+        displayresult.innerHTML = "Scores reset!" +
+        "<br><br>Your score: "+playerWins +
+        "<br>Computer score: "+computerWins;
     }
     else{
-        displayresult.innerHTML = "Can't reset scores before finishing! Nice try ;)"
-        + "<br><br>Your score: "+playerWins
-        + "<br>Computer score: "+computerWins;
+        displayresult.innerHTML = "Can't reset scores before finishing! Nice try ;)"+
+        "<br><br>Your score: " + playerWins+
+        "<br>Computer score: " + computerWins;
     }  
 });
 
 rock.addEventListener("click", () => {
-    let computerSelection = computerPlay();
-    result = playRound("rock", computerSelection);
-    console.log(result);
-    if(computerWins > 4){
-        title.innerHTML = "YOU LOST! GAME OVER!"
-    }
-    else if(playerWins > 4){
-        title.innerHTML = "YOU WON! CONGRATULATIONS!"
-    }
-    displayresult.innerHTML = result
-    + "<br><br>Your score: "+playerWins
-    + "<br>Computer score: "+computerWins;
+    choice("rock");
 });
 
 paper.addEventListener("click", () => {
-    let computerSelection = computerPlay();
-    result = playRound("paper", computerSelection);
-    console.log(result);
-    if(computerWins > 4){
-        title.innerHTML = "YOU LOST! GAME OVER!"
-    }
-    else if(playerWins > 4){
-        title.innerHTML = "YOU WON! CONGRATULATIONS!"
-    }
-    displayresult.innerHTML = result
-    + "<br><br>Your score: "+playerWins
-    + "<br>Computer score: "+computerWins;
+    choice("paper");
 });
 
 scissors.addEventListener("click", () => {
-    let computerSelection = computerPlay();
-    result = playRound("scissors", computerSelection);
-    console.log(result);
-    if(computerWins > 4){
-        title.innerHTML = "YOU LOST! GAME OVER!"
-    }
-    else if(playerWins > 4){
-        title.innerHTML = "YOU WON! CONGRATULATIONS!"
-    }
-    displayresult.innerHTML = result
-    + "<br><br>Your score: "+playerWins
-    + "<br>Computer score: "+computerWins;
+    choice("scissors");
 });
 
